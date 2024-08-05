@@ -15,8 +15,4 @@ async def wait_n(n: int, max_delay: int) -> List[float]:
     wait_times = await asyncio.gather(
         *tuple(map(lambda _: wait_random(max_delay), range(n)))
     )
-    for i in range(len(wait_times)):
-        for j in range(len(wait_times) - 1 - i):
-            if wait_times[j] > wait_times[j + 1]:
-                wait_times[j], wait_times[j + 1] = wait_times[j + 1], wait_times[j]
-    return wait_times
+    return sorted(wait_times)
